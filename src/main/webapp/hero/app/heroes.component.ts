@@ -4,6 +4,7 @@ import { Router }            from '@angular/router';
 import { Hero }                from './hero';
 import { HeroService }         from './hero.service';
 
+
 @Component({
   moduleId: module.id,
   selector: 'my-heroes',
@@ -13,6 +14,8 @@ import { HeroService }         from './hero.service';
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
   selectedHero: Hero;
+  updateHeroPromise: Promise;
+  binder = zkbind.$('$heroes');
 
   constructor(
     private heroService: HeroService,
@@ -20,30 +23,39 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService
-        .getHeroes()
-        .then(heroes => this.heroes = heroes);
+        .getHeroes();
+//        .then(heroes => this.heroes = heroes);
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.create(name)
-      .then(hero => {
-        this.heroes.push(hero);
-        this.selectedHero = null;
-      });
+    this.heroService.create(name);
+//      .then(hero => {
+//        this.heroes.push(hero);
+//        this.selectedHero = null;
+//      });
   }
 
   delete(hero: Hero): void {
     this.heroService
-        .delete(hero.id)
-        .then(() => {
-          this.heroes = this.heroes.filter(h => h !== hero);
-          if (this.selectedHero === hero) { this.selectedHero = null; }
-        });
+        .delete(hero.id);
+//        .then(() => {
+//          this.heroes = this.heroes.filter(h => h !== hero);
+//          if (this.selectedHero === hero) { this.selectedHero = null; }
+//        });
   }
 
   ngOnInit(): void {
+    this.binder.after('updateHero', heroes => {
+      this.heroes = heroes;
+    }); 
+    this.binder.after('delete', heroes => {
+      this.heroes = heroes;
+    });
+    this.binder.after('add', heroes => {
+      this.heroes = heroes;
+    });                         
     this.getHeroes();
   }
 

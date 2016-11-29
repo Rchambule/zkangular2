@@ -5,19 +5,22 @@ import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
 
+
 @Injectable()
 export class HeroService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private heroesUrl = 'app/heroes';  // URL to web api
+  private binder = zkbind.$('$heroes');
 
   constructor(private http: Http) { }
 
   getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
-               .toPromise()
-               .then(response => response.json().data as Hero[])
-               .catch(this.handleError);
+//    return this.http.get(this.heroesUrl)
+//               .toPromise()
+//               .then(response => response.json().data as Hero[])
+//               .catch(this.handleError);
+    this.binder.command('reload');     
   }
 
   getHero(id: number): Promise<Hero> {
@@ -26,19 +29,21 @@ export class HeroService {
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.heroesUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
-      .catch(this.handleError);
+//    const url = `${this.heroesUrl}/${id}`;
+//    return this.http.delete(url, {headers: this.headers})
+//      .toPromise()
+//      .then(() => null)
+//      .catch(this.handleError);
+    this.binder.command('delete', {'id':id}); 
   }
 
   create(name: string): Promise<Hero> {
-    return this.http
-      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
-      .toPromise()
-      .then(res => res.json().data)
-      .catch(this.handleError);
+//    return this.http
+//      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+//      .toPromise()
+//      .then(res => res.json().data)
+//      .catch(this.handleError);
+    this.binder.command('add', {'name':name});    
   }
 
   update(hero: Hero): Promise<Hero> {
