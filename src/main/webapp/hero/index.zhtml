@@ -22,6 +22,7 @@
     	<z:div id="heroes"
     		viewModel="@id('vm')@init('org.zkoss.zkangular.HeroVM')">
     		<my-app>Loading...</my-app>
+    		<z:button label="show" onClick="@command('show')"/>
     	</z:div>
   </body>
 </html>

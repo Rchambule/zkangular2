@@ -10,13 +10,16 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.NotifyCommand;
 import org.zkoss.bind.annotation.ToClientCommand;
 import org.zkoss.bind.annotation.ToServerCommand;
+import org.zkoss.zk.ui.util.Clients;
 
 @NotifyCommand(value="updateHero", onChange="_vm_.heroes")
 @ToClientCommand({"updateHero"})
-@ToServerCommand({"reload"})
+@ToServerCommand({"reload", "delete", "add"})
 public class HeroVM {
 
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
+	
+	private static Integer currentIndex = 20;
 
 	@Init
 	public void init() {
@@ -36,6 +39,30 @@ public class HeroVM {
 	public void reload(){
 		
 	}
+	
+	@Command @NotifyChange("heroes")
+	public void delete(@BindingParam("id")String id){
+		for (Hero h: heroes){
+			if (h.getId().toString().equals(id)){
+				heroes.remove(h);
+				break;
+			}
+		}
+	}
+	
+	@Command @NotifyChange("heroes")
+	public void add(@BindingParam("name")String name){
+		heroes.add(new Hero(nextId(), name));
+	}
+	
+	@Command
+	public void show(){
+		StringBuilder heroesString = new StringBuilder();
+		for (Hero h : heroes){
+			heroesString.append(h.toString()+" ");
+		}
+		Clients.showNotification(heroesString.toString());
+	}
 
 	public ArrayList<Hero> getHeroes() {
 		return heroes;
@@ -43,6 +70,10 @@ public class HeroVM {
 
 	public void setHeroes(ArrayList<Hero> heroes) {
 		this.heroes = heroes;
+	}
+	
+	public static Integer nextId(){
+		return currentIndex++;
 	}
 	
 }

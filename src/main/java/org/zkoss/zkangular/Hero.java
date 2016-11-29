@@ -43,7 +43,7 @@ public class Hero {
 		return true;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -57,6 +57,11 @@ public class Hero {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return "#"+id+" "+name;
 	}
 
 }
