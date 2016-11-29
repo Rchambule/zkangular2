@@ -47,6 +47,7 @@ export class HeroService {
   }
 
   update(hero: Hero): Promise<Hero> {
+    this.binder.command('update', {'hero':hero});      
     const url = `${this.heroesUrl}/${hero.id}`;
     return this.http
       .put(url, JSON.stringify(hero), {headers: this.headers})

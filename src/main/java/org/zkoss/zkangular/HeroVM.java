@@ -14,7 +14,7 @@ import org.zkoss.zk.ui.util.Clients;
 
 @NotifyCommand(value="updateHero", onChange="_vm_.heroes")
 @ToClientCommand({"updateHero"})
-@ToServerCommand({"reload", "delete", "add"})
+@ToServerCommand({"reload", "delete", "add", "update"})
 public class HeroVM {
 
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
@@ -53,6 +53,17 @@ public class HeroVM {
 	@Command @NotifyChange("heroes")
 	public void add(@BindingParam("name")String name){
 		heroes.add(new Hero(nextId(), name));
+	}
+
+	@Command @NotifyChange("heroes")
+	public void update(@BindingParam("hero")Hero hero){
+		for (int i = 0 ; i < heroes.size() ; i++){
+			Hero h = heroes.get(i);
+			if (h.getId().equals(hero.getId())){
+				heroes.remove(i);
+				heroes.add(i, hero);
+			}
+		}
 	}
 	
 	@Command

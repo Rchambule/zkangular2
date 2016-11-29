@@ -14,6 +14,7 @@ import { HeroService } from './hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
+  private binder = zkbind.$('$heroes');;
 
   constructor(
     private heroService: HeroService,
@@ -22,9 +23,21 @@ export class HeroDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-      .subscribe(hero => this.hero = hero);
+//    this.route.params
+//      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
+//      .subscribe(hero => this.hero = hero);
+    this.heroService.getHeroes();
+    this.binder.after('updateHero', heroes => {
+      this.route.params.switchMap((params: Params) => {
+          for (var i = 0 ; i < heroes.length ; i++){
+              if (heroes[i].id == params.id){
+                  return Promise.resolve(heroes[i]);
+              }
+          }
+      }).subscribe(hero => {
+          this.hero = hero
+      });
+    });
   }
 
   save(): void {
