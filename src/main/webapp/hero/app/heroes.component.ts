@@ -47,18 +47,15 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.binder.after('updateHero', heroes => {
-      this.heroes = heroes;
-    }); 
-    this.binder.after('delete', heroes => {
-      this.heroes = heroes;
-    });
-    this.binder.after('add', heroes => {
-      this.heroes = heroes;
-    });                         
+    this.binder.after('updateHero', this.setHeroes);       
+    this.binder.after('delete', this.setHeroes);
+    this.binder.after('add', this.setHeroes);                         
     this.getHeroes();
   }
 
+  setHeroes(heroes){
+      this.heroes = heroes;
+  }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
