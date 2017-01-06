@@ -47,9 +47,8 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.binder.after('updateHero', this.setHeroes);       
-    this.binder.after('delete', this.setHeroes);
-    this.binder.after('add', this.setHeroes);                         
+    //https://github.com/Microsoft/TypeScript/wiki/'this'-in-TypeScript
+    this.binder.after('updateHero', this.setHeroes.bind(this));                 
     this.getHeroes();
   }
 
