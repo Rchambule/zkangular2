@@ -12,7 +12,8 @@
 	</properties>
 	<packaging>war</packaging>
 	<name>The zkangular2 Project</name>
-	<description>The example project to demonstrate an approach to integrate ZK with Angular2 </description>
+	<description>The example project to demonstrate an approach to integrate ZK with Angular2 with ZK CE.
+It requires to implement a JSON converter by yourselves.</description>
 	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
@@ -47,17 +48,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkmax</artifactId>
-			<version>${zk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zuti</artifactId>
-			<version>${zk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkplus</artifactId>
+			<artifactId>zul</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
@@ -82,6 +73,11 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>3.3.6</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.0</version>
+		</dependency>		
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

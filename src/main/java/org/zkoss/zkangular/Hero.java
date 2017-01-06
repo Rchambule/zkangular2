@@ -1,6 +1,8 @@
 package org.zkoss.zkangular;
 
-public class Hero {
+import org.zkoss.json.JSONAware;
+
+public class Hero implements JSONAware{
 
 	private int id;
 	private String name;
@@ -62,6 +64,11 @@ public class Hero {
 	@Override
 	public String toString() {
 		return "#"+id+" "+name;
+	}
+
+	@Override
+	public String toJSONString() {
+		return JsonConverter.toJson(this);
 	}
 
 }
