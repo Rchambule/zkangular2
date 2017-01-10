@@ -1,0 +1,21 @@
+<?meta name="viewport" content="width=device-width, initial-scale=1"?>
+<?page title="Angular Tour of Heroes" ?>
+<?script content="document.write('<base href=' + document.location + '>')"?>
+<!-- Polyfills for older browsers -->
+<?script src="https://unpkg.com/core-js/client/shim.min.js"?>
+<?script src="https://unpkg.com/zone.js@0.6.25?main=browser"?>
+<?script src="https://unpkg.com/reflect-metadata@0.1.8"?>
+<?script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"?>
+<?script src="https://cdn.rawgit.com/angular/angular.io/f2daab7/public/docs/_examples/_boilerplate/systemjs.config.web.js"?>
+<?link rel="stylesheet" href="/hero/styles.css"?>
+<zk xmlns:n="native">
+	<div id="heroes"
+		viewModel="@id('vm')@init('org.zkoss.zkangular.HeroVM')">
+		<n:my-app>Loading...</n:my-app>
+		<n:br />
+		<n:br />
+		<button label="list all at the server"
+			onClick="@command('show')" />
+	</div>
+
+</zk>
