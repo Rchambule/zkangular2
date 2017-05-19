@@ -15,24 +15,23 @@ import org.zkoss.zk.ui.util.Clients;
 @NotifyCommand(value="updateHero", onChange="_vm_.heroes")
 @ToClientCommand({"updateHero"})
 @ToServerCommand({"reload", "delete", "add", "update"})
-public class HeroVM {
+public class HeroEditorVM {
 
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
-	
-	private static Integer currentIndex = 20;
+	private static Integer currentIndex = 10;
 
 	@Init
 	public void init() {
-		heroes.add(new Hero(11, "Mr. Nice"));
-		heroes.add(new Hero(12, "Narco"));
-		heroes.add(new Hero(13, "Bombasto"));
-		heroes.add(new Hero(14, "Celeritas"));
-		heroes.add(new Hero(15, "Magneta"));
-		heroes.add(new Hero(16, "RubberMan"));
-		heroes.add(new Hero(17, "Dynama"));
-		heroes.add(new Hero(18, "Dr IQ"));
-		heroes.add(new Hero(19, "Magma"));
-		heroes.add(new Hero(20, "Tornado"));
+		heroes.add(new Hero(nextId(), "Mr. Nice"));
+		heroes.add(new Hero(nextId(), "Narco"));
+		heroes.add(new Hero(nextId(), "Bombasto"));
+		heroes.add(new Hero(nextId(), "Celeritas"));
+		heroes.add(new Hero(nextId(), "Magneta"));
+		heroes.add(new Hero(nextId(), "RubberMan"));
+		heroes.add(new Hero(nextId(), "Dynama"));
+		heroes.add(new Hero(nextId(), "Dr IQ"));
+		heroes.add(new Hero(nextId(), "Magma"));
+		heroes.add(new Hero(nextId(), "Tornado"));
 	}
 	
 	@Command @NotifyChange("heroes")
@@ -83,7 +82,7 @@ public class HeroVM {
 		this.heroes = heroes;
 	}
 	
-	public static Integer nextId(){
+	private static Integer nextId(){
 		return currentIndex++;
 	}
 	

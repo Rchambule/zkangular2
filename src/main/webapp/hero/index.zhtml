@@ -20,7 +20,7 @@
 
   <body>
     	<z:div id="heroes"
-    		viewModel="@id('vm')@init('org.zkoss.zkangular.HeroVM')">
+    		viewModel="@id('vm')@init('org.zkoss.zkangular.HeroEditorVM')">
     		<my-app>Loading...</my-app>
     		<br/><br/>
     		<z:button label="list all at the server" onClick="@command('show')"/>
