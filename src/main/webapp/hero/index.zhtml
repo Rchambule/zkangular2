@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:z="zul">
+<html xmlns:z="zul" xmlns="native">
   <head>
     <script>document.write('<base href="' + document.location + '" />');</script>
     <title>Angular Tour of Heroes</title>
@@ -23,7 +23,7 @@
     		viewModel="@id('vm')@init('org.zkoss.zkangular.HeroEditorVM')">
     		<my-app>Loading...</my-app>
     		<br/><br/>
-    		<z:button label="list all at the server" onClick="@command('show')"/>
+    		<z:button label="list heroes at the server" onClick="@command('show')"/>
     	</z:div>
   </body>
 </html>

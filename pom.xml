@@ -5,7 +5,7 @@
 	<artifactId>zkangular2</artifactId>
 	<version>0.1</version>
 	<properties>
-		<zk.version>8.0.3.1-Eval</zk.version>
+		<zk.version>8.0.5-Eval</zk.version>
 		<commons-io>2.4</commons-io>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
@@ -71,7 +71,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io}</version>
 		</dependency>
-		<!-- front-end dependencies -->
+		<!-- front-end dependencies 
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>angularjs</artifactId>
@@ -82,6 +82,7 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>3.3.6</version>
 		</dependency>
+		-->
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

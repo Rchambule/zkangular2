@@ -35,7 +35,7 @@ export class HeroDetailComponent implements OnInit {
               }
           }
       }).subscribe(hero => {
-          this.hero = hero
+          this.hero = hero;
       });
     });
   }
