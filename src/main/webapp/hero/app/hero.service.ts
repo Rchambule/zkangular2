@@ -15,7 +15,7 @@ export class HeroService {
 
   constructor(private http: Http) { }
 
-  getHeroes(): Promise<Hero[]> {
+  getHeroes(): void {
 //    return this.http.get(this.heroesUrl)
 //               .toPromise()
 //               .then(response => response.json().data as Hero[])
@@ -28,7 +28,7 @@ export class HeroService {
                .then(heroes => heroes.find(hero => hero.id === id));
   }
 
-  delete(id: number): Promise<void> {
+  delete(id: number): void {
 //    const url = `${this.heroesUrl}/${id}`;
 //    return this.http.delete(url, {headers: this.headers})
 //      .toPromise()
@@ -37,7 +37,7 @@ export class HeroService {
     this.binder.command('delete', {'id':id}); 
   }
 
-  create(name: string): Promise<Hero> {
+  create(name: string): void {
 //    return this.http
 //      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
 //      .toPromise()
@@ -46,7 +46,7 @@ export class HeroService {
     this.binder.command('add', {'name':name});    
   }
 
-  update(hero: Hero): Promise<Hero> {
+  update(hero: Hero): void {
     this.binder.command('update', {'hero':hero});      
 //    const url = `${this.heroesUrl}/${hero.id}`;
 //    return this.http
