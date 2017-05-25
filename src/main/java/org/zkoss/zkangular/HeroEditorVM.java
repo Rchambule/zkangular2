@@ -69,7 +69,7 @@ public class HeroEditorVM {
 	public void show(){
 		StringBuilder heroesString = new StringBuilder();
 		for (Hero h : heroes){
-			heroesString.append(h.toString()+" ");
+			heroesString.append(h.toString()+"<br>");
 		}
 		Clients.showNotification(heroesString.toString());
 	}
