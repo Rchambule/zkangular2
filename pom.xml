@@ -12,7 +12,7 @@
 	</properties>
 	<packaging>war</packaging>
 	<name>The zkangular2 Project</name>
-	<description>The example project to demonstrate an approach to integrate ZK with Angular2 </description>
+	<description>An example project that demonstrates using ZK with Angular. It's based on Angular official tutorial example, Hero Editor.</description>
 	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
