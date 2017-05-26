@@ -1,24 +1,21 @@
 package org.zkoss.zkangular;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.annotation.NotifyCommand;
-import org.zkoss.bind.annotation.ToClientCommand;
-import org.zkoss.bind.annotation.ToServerCommand;
+import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.util.Clients;
 
-@NotifyCommand(value="updateHero", onChange="_vm_.heroes")
-@ToClientCommand({"updateHero"})
-@ToServerCommand({"reload", "delete", "add", "update"})
+@NotifyCommands({
+@NotifyCommand(value="updateHero", onChange="_vm_.heroes"),
+@NotifyCommand(value="getHero", onChange="_vm_.selected")
+})
+@ToClientCommand({"updateHero", "getHero"})
+@ToServerCommand({"reload", "delete", "add", "update", "get"})
 public class HeroEditorVM {
 
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static Integer currentIndex = 10;
+	private Hero selected;
 
 	@Init
 	public void init() {
@@ -73,6 +70,17 @@ public class HeroEditorVM {
 		}
 		Clients.showNotification(heroesString.toString());
 	}
+	
+	@Command 
+	@NotifyChange("selected")
+	public void get(@BindingParam("id")Integer id){
+		for (Hero h: heroes){
+			if (h.getId().equals(id)){
+				selected = h;
+				break;
+			}
+		}
+	}
 
 	public ArrayList<Hero> getHeroes() {
 		return heroes;
@@ -84,6 +92,14 @@ public class HeroEditorVM {
 	
 	private static Integer nextId(){
 		return currentIndex++;
+	}
+
+	public Hero getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Hero selected) {
+		this.selected = selected;
 	}
 	
 }

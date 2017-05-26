@@ -26,23 +26,18 @@ export class HeroDetailComponent implements OnInit {
 //    this.route.params
 //      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
 //      .subscribe(hero => this.hero = hero);
-    this.heroService.getHeroes();
-    this.binder.after('updateHero', heroes => {
-      this.route.params.switchMap((params: Params) => {
-          for (var i = 0 ; i < heroes.length ; i++){
-              if (heroes[i].id == params.id){
-                  return Promise.resolve(heroes[i]);
-              }
-          }
-      }).subscribe(hero => {
-          this.hero = hero;
-      });
+    this.binder.after('getHero', hero =>{
+      this.hero = hero;
     });
+
+    this.route.params.map((params: Params) => +params['id']).subscribe(id => {
+          this.heroService.getHero(id);
+      });
   }
 
   save(): void {
     this.heroService.update(this.hero)
-      .then(() => this.goBack());
+      //.then(() => this.goBack());
   }
 
   goBack(): void {

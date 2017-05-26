@@ -23,12 +23,13 @@ export class HeroService {
     this.binder.command('reload');     
   }
 
-  getHero(id: number): Promise<Hero> {
-    return this.getHeroes()
-               .then(heroes => heroes.find(hero => hero.id === id));
+  getHero(id: number): void {
+//    return this.getHeroes()
+//               .then(heroes => heroes.find(hero => hero.id === id));
+    this.binder.command('get', {'id':id}); 
   }
 
-  delete(id: number): void {
+  delete(id: number): Promise<Hero> {
 //    const url = `${this.heroesUrl}/${id}`;
 //    return this.http.delete(url, {headers: this.headers})
 //      .toPromise()
