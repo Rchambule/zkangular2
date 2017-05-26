@@ -26,7 +26,7 @@ export class HeroService {
   getHero(id: number): void {
 //    return this.getHeroes()
 //               .then(heroes => heroes.find(hero => hero.id === id));
-    this.binder.command('get', {'id':id}); 
+    this.binder.command('reload', {'id':id}); 
   }
 
   delete(id: number): Promise<Hero> {

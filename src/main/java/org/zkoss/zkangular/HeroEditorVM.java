@@ -1,65 +1,49 @@
 package org.zkoss.zkangular;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.util.Clients;
 
-@NotifyCommands({
-@NotifyCommand(value="updateHero", onChange="_vm_.heroes"),
-@NotifyCommand(value="getHero", onChange="_vm_.selected")
-})
-@ToClientCommand({"updateHero", "getHero"})
-@ToServerCommand({"reload", "delete", "add", "update", "get"})
+@NotifyCommand(value="updateHero", onChange="_vm_.heroes")
+@ToClientCommand({"updateHero"})
+@ToServerCommand({"reload", "delete", "add", "update"})
 public class HeroEditorVM {
 
-	private ArrayList<Hero> heroes = new ArrayList<Hero>();
-	private static Integer currentIndex = 10;
-	private Hero selected;
+	private List<Hero> heroes = new ArrayList<Hero>();
+	private HeroDao dao = new HeroDao();
 
-	@Init
-	public void init() {
-		heroes.add(new Hero(nextId(), "Mr. Nice"));
-		heroes.add(new Hero(nextId(), "Narco"));
-		heroes.add(new Hero(nextId(), "Bombasto"));
-		heroes.add(new Hero(nextId(), "Celeritas"));
-		heroes.add(new Hero(nextId(), "Magneta"));
-		heroes.add(new Hero(nextId(), "RubberMan"));
-		heroes.add(new Hero(nextId(), "Dynama"));
-		heroes.add(new Hero(nextId(), "Dr IQ"));
-		heroes.add(new Hero(nextId(), "Magma"));
-		heroes.add(new Hero(nextId(), "Tornado"));
-	}
-	
 	@Command @NotifyChange("heroes")
-	public void reload(){
-		
+	public void reload(@BindingParam("id")Integer id){
+		if (id == null){
+			heroes = dao.queryAll();
+		}else{//query one
+			Hero selected = null;
+			for (Hero h: heroes){
+				if (h.getId().equals(id)){
+					selected = h;
+					break;
+				}
+			}
+			heroes.clear();
+			heroes.add(selected);
+		}
 	}
 	
 	@Command @NotifyChange("heroes")
 	public void delete(@BindingParam("id")String id){
-		for (Hero h: heroes){
-			if (h.getId().toString().equals(id)){
-				heroes.remove(h);
-				break;
-			}
-		}
+		dao.remove(id);
+		reload(null);
 	}
 	
 	@Command @NotifyChange("heroes")
 	public void add(@BindingParam("name")String name){
-		heroes.add(new Hero(nextId(), name));
+		heroes.add(dao.create(name));
 	}
 
 	@Command @NotifyChange("heroes")
 	public void update(@BindingParam("hero")Hero hero){
-		for (int i = 0 ; i < heroes.size() ; i++){
-			Hero h = heroes.get(i);
-			if (h.getId().equals(hero.getId())){
-				heroes.remove(i);
-				heroes.add(i, hero);
-			}
-		}
+		dao.update(hero);
 	}
 	
 	@Command
@@ -71,35 +55,12 @@ public class HeroEditorVM {
 		Clients.showNotification(heroesString.toString());
 	}
 	
-	@Command 
-	@NotifyChange("selected")
-	public void get(@BindingParam("id")Integer id){
-		for (Hero h: heroes){
-			if (h.getId().equals(id)){
-				selected = h;
-				break;
-			}
-		}
-	}
-
-	public ArrayList<Hero> getHeroes() {
+	public List<Hero> getHeroes() {
 		return heroes;
 	}
 
 	public void setHeroes(ArrayList<Hero> heroes) {
 		this.heroes = heroes;
-	}
-	
-	private static Integer nextId(){
-		return currentIndex++;
-	}
-
-	public Hero getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Hero selected) {
-		this.selected = selected;
 	}
 	
 }

@@ -26,8 +26,8 @@ export class HeroDetailComponent implements OnInit {
 //    this.route.params
 //      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
 //      .subscribe(hero => this.hero = hero);
-    this.binder.after('getHero', hero =>{
-      this.hero = hero;
+    this.binder.after('updateHero', heroes =>{
+      this.hero = heroes[0];
     });
 
     this.route.params.map((params: Params) => +params['id']).subscribe(id => {
