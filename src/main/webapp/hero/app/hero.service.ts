@@ -29,7 +29,7 @@ export class HeroService {
     this.binder.command('reload', {'id':id}); 
   }
 
-  delete(id: number): Promise<Hero> {
+  delete(id: number): void {
 //    const url = `${this.heroesUrl}/${id}`;
 //    return this.http.delete(url, {headers: this.headers})
 //      .toPromise()
@@ -57,10 +57,10 @@ export class HeroService {
 //      .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+//  private handleError(error: any): Promise<any> {
+//    console.error('An error occurred', error); // for demo purposes only
+//    return Promise.reject(error.message || error);
+//  }
 }
 
 
