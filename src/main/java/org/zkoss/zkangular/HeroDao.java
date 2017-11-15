@@ -8,8 +8,8 @@ import java.util.*;
  *
  */
 public class HeroDao {
-	static Integer currentIndex = 10;
-	static private ArrayList<Hero> heroes = new ArrayList<Hero>();
+	Integer currentIndex = 10;
+	private ArrayList<Hero> heroes = new ArrayList<Hero>();
 
 	{
 		heroes.add(new Hero(nextId(), "Mr. Nice"));
@@ -53,7 +53,7 @@ public class HeroDao {
 		}
 	}
 	
-	static Integer nextId(){
+	Integer nextId(){
 		return currentIndex++;
 	}
 
