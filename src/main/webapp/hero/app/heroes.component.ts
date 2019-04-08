@@ -4,6 +4,7 @@ import { Router }            from '@angular/router';
 import { Hero }                from './hero';
 import { HeroService }         from './hero.service';
 
+declare var zkbind:any;
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,7 @@ import { HeroService }         from './hero.service';
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
   selectedHero: Hero;
-  updateHeroPromise: Promise;
+  updateHeroPromise: Promise<any>;
   binder = zkbind.$('$heroes');
 
   constructor(

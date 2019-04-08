@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
 
+declare var zkbind:any;
 
 @Injectable()
 export class HeroService {

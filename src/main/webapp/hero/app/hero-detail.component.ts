@@ -6,6 +6,8 @@ import { Location }               from '@angular/common';
 import { Hero }        from './hero';
 import { HeroService } from './hero.service';
 
+declare var zkbind:any;
+
 @Component({
   moduleId: module.id,
   selector: 'my-hero-detail',

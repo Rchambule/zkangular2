@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "lib": ["es2016", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -13,6 +14,6 @@
         "src/main/webapp/**/*"
   ],
   "exclude": [
-    "src/main/webapp/node_modules/**/*"
+    "src/main/webapp/hero/node_modules/**/*"
   ]
 }
